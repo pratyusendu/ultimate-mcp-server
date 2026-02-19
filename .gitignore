@@ -1,0 +1,34 @@
+# Strict mode: ignore everything by default
+*
+
+# Re-include folders so allowlisted files inside can be tracked
+!*/
+
+# Always keep gitignore itself tracked
+!.gitignore
+
+# Allow code/config/document file types
+!**/*.js
+!**/*.mjs
+!**/*.cjs
+!**/*.ts
+!**/*.tsx
+!**/*.jsx
+!**/*.json
+!**/*.md
+!**/*.yml
+!**/*.yaml
+!**/*.sh
+!**/*.ps1
+
+# Keep sensitive/generated/unwanted files ignored
+node_modules/
+.vercel/
+.env
+.env.*
+*.log
+*.docx
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
