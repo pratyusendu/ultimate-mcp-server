@@ -1,0 +1,1079 @@
+{
+  "info": {
+    "name": "Ultimate MCP Server — All 103 Tools",
+    "_postman_id": "ultimate-mcp-server-collection",
+    "description": "Complete collection for the Ultimate All-in-One MCP Server with 103 tools across 7 categories.\n\n## Setup\n1. Import this collection\n2. Import the `MCP_Environment.json` environment file\n3. Set your `BASE_URL` in the environment\n4. Run any request!\n\n## Categories\n- 📝 Text & Content (20 tools)\n- 🔢 Data & Math (15 tools)\n- 🌐 Web & Research (12 tools)\n- 📅 Date & Time (10 tools)\n- 💼 Business & Finance (12 tools)\n- 💻 Developer Tools (11 tools)\n- 🤖 AI Prompts & Templates (10 tools)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "https://YOUR-VERCEL-URL.vercel.app",
+      "description": "Your Vercel deployment URL — change this!"
+    }
+  ],
+  "item": [
+
+    {
+      "name": "🔧 Server",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{BASE_URL}}/health", "host": ["{{BASE_URL}}"], "path": ["health"] },
+            "description": "Check if the MCP server is running and healthy."
+          }
+        },
+        {
+          "name": "View All Tools (Catalog)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{BASE_URL}}/tools", "host": ["{{BASE_URL}}"], "path": ["tools"] },
+            "description": "Returns all 103 tools grouped by category."
+          }
+        },
+        {
+          "name": "Landing Page",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{BASE_URL}}/", "host": ["{{BASE_URL}}"], "path": [""] },
+            "description": "The HTML landing page of the MCP server."
+          }
+        },
+        {
+          "name": "MCP Initialize",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 1,\n  \"method\": \"initialize\"\n}"
+            },
+            "description": "Initialize the MCP connection. Returns server info and capabilities."
+          }
+        },
+        {
+          "name": "MCP List All Tools",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 2,\n  \"method\": \"tools/list\"\n}"
+            },
+            "description": "List all available tools via the MCP protocol."
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "📝 Text & Content",
+      "item": [
+        {
+          "name": "01 — Summarize Text",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 101,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"summarize_text\",\n    \"arguments\": {\n      \"text\": \"Artificial intelligence is transforming industries worldwide. Companies are investing billions in AI research and development. Machine learning models are becoming more sophisticated every year. Natural language processing has reached a point where AI can write, code, and reason at near-human levels. The impact on jobs and society remains a topic of intense debate among experts and policymakers around the globe.\",\n      \"max_sentences\": 2\n    }\n  }\n}"
+            },
+            "description": "Summarize long text into key sentences. Change max_sentences to control output length."
+          }
+        },
+        {
+          "name": "02 — Word Count",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 102,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"word_count\",\n    \"arguments\": {\n      \"text\": \"Hello world! This is a sample sentence for counting words, characters, and more.\"\n    }\n  }\n}"
+            },
+            "description": "Count words, characters, sentences, paragraphs, reading time, speaking time."
+          }
+        },
+        {
+          "name": "03 — Extract Emails",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 103,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"extract_emails\",\n    \"arguments\": {\n      \"text\": \"Contact us at hello@company.com or support@helpdesk.com. You can also reach our CEO at john.doe@startup.io for partnerships.\"\n    }\n  }\n}"
+            },
+            "description": "Extract all unique email addresses from any text."
+          }
+        },
+        {
+          "name": "04 — Extract URLs",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 104,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"extract_urls\",\n    \"arguments\": {\n      \"text\": \"Visit https://google.com and https://github.com/anthropics for more info. Also check https://vercel.com/docs.\"\n    }\n  }\n}"
+            },
+            "description": "Extract all URLs from any text or HTML content."
+          }
+        },
+        {
+          "name": "05 — Extract Phone Numbers",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 105,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"extract_phone_numbers\",\n    \"arguments\": {\n      \"text\": \"Call us at +1-800-555-1234 or (212) 456-7890. International: +44 20 7946 0958.\"\n    }\n  }\n}"
+            },
+            "description": "Extract all phone numbers in various formats from text."
+          }
+        },
+        {
+          "name": "06 — Text to Slug",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 106,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"text_to_slug\",\n    \"arguments\": {\n      \"text\": \"My Awesome Blog Post Title! (2025 Edition)\",\n      \"separator\": \"-\"\n    }\n  }\n}"
+            },
+            "description": "Convert any text into a URL-friendly slug."
+          }
+        },
+        {
+          "name": "07 — Text Case Converter",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 107,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"text_case_converter\",\n    \"arguments\": {\n      \"text\": \"hello world from mcp server\",\n      \"case_type\": \"camel\"\n    }\n  }\n}"
+            },
+            "description": "Convert text between: upper, lower, title, camel, snake, kebab, pascal, sentence"
+          }
+        },
+        {
+          "name": "08 — Find & Replace",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 108,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"find_replace\",\n    \"arguments\": {\n      \"text\": \"The customer is always right. The customer comes first. Every customer matters.\",\n      \"find\": \"customer\",\n      \"replace\": \"client\",\n      \"use_regex\": false,\n      \"case_sensitive\": false\n    }\n  }\n}"
+            },
+            "description": "Find and replace text with optional regex support."
+          }
+        },
+        {
+          "name": "09 — Text Diff",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 109,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"text_diff\",\n    \"arguments\": {\n      \"text1\": \"The quick brown fox\\nJumps over the lazy dog\\nHello World\",\n      \"text2\": \"The quick brown fox\\nJumps over the lazy cat\\nHello Universe\"\n    }\n  }\n}"
+            },
+            "description": "Compare two texts and find added/removed lines with similarity score."
+          }
+        },
+        {
+          "name": "10 — Truncate Text",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 110,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"truncate_text\",\n    \"arguments\": {\n      \"text\": \"This is a very long product description that needs to be shortened for display in a card component on our website.\",\n      \"max_length\": 60,\n      \"ellipsis\": \"...\",\n      \"break_on_word\": true\n    }\n  }\n}"
+            },
+            "description": "Truncate text to a max length, breaking on word boundaries."
+          }
+        },
+        {
+          "name": "11 — Generate Lorem Ipsum",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 111,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"generate_lorem_ipsum\",\n    \"arguments\": {\n      \"paragraphs\": 3,\n      \"sentences_per_paragraph\": 4\n    }\n  }\n}"
+            },
+            "description": "Generate Lorem Ipsum placeholder text for mockups."
+          }
+        },
+        {
+          "name": "12 — Palindrome Check",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 112,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"palindrome_check\",\n    \"arguments\": {\n      \"text\": \"A man a plan a canal Panama\",\n      \"ignore_spaces\": true,\n      \"ignore_case\": true\n    }\n  }\n}"
+            },
+            "description": "Check if text reads the same forwards and backwards."
+          }
+        },
+        {
+          "name": "13 — Text Statistics",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 113,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"text_statistics\",\n    \"arguments\": {\n      \"text\": \"The quick brown fox jumps over the lazy dog. The dog barked at the fox. The fox ran away quickly into the forest.\"\n    }\n  }\n}"
+            },
+            "description": "Advanced text stats: top words, word frequency, lexical diversity, longest word."
+          }
+        },
+        {
+          "name": "14 — Validate Email",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 114,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"validate_email\",\n    \"arguments\": {\n      \"email\": \"user@example.com\"\n    }\n  }\n}"
+            },
+            "description": "Validate email format and extract local part and domain."
+          }
+        },
+        {
+          "name": "15 — Validate URL",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 115,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"validate_url\",\n    \"arguments\": {\n      \"url\": \"https://mywebsite.com/products?category=shoes&size=10#reviews\"\n    }\n  }\n}"
+            },
+            "description": "Validate and parse a URL into all its components."
+          }
+        },
+        {
+          "name": "16 — Encode / Decode (Base64)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 116,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"text_encode_decode\",\n    \"arguments\": {\n      \"text\": \"Hello World! This is a secret message.\",\n      \"operation\": \"encode_base64\"\n    }\n  }\n}"
+            },
+            "description": "Encode or decode: encode_base64, decode_base64, encode_uri, decode_uri, encode_html, decode_html"
+          }
+        },
+        {
+          "name": "17 — Generate Password",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 117,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"generate_password\",\n    \"arguments\": {\n      \"length\": 16,\n      \"include_uppercase\": true,\n      \"include_numbers\": true,\n      \"include_symbols\": true,\n      \"count\": 5\n    }\n  }\n}"
+            },
+            "description": "Generate secure random passwords. Adjust length and character types."
+          }
+        },
+        {
+          "name": "18 — Generate Username",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 118,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"generate_username\",\n    \"arguments\": {\n      \"base_word\": \"Pratyush\",\n      \"count\": 8\n    }\n  }\n}"
+            },
+            "description": "Generate creative username suggestions from a name or keyword."
+          }
+        },
+        {
+          "name": "19 — Check Readability",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 119,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"check_readability\",\n    \"arguments\": {\n      \"text\": \"The utilization of sophisticated computational methodologies necessitates a comprehensive understanding of underlying algorithmic paradigms. Implementation requires meticulous attention to architectural considerations.\"\n    }\n  }\n}"
+            },
+            "description": "Get Flesch-Kincaid readability score and grade level."
+          }
+        },
+        {
+          "name": "20 — Anagram Checker",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 120,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"anagram_checker\",\n    \"arguments\": {\n      \"word1\": \"listen\",\n      \"word2\": \"silent\"\n    }\n  }\n}"
+            },
+            "description": "Check if two words are anagrams of each other."
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🔢 Data & Math",
+      "item": [
+        {
+          "name": "21 — Calculator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 201,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"calculator\",\n    \"arguments\": {\n      \"expression\": \"(500 * 12) + (250 * 52) - 1000\"\n    }\n  }\n}" },
+            "description": "Evaluate math expressions safely. Supports +, -, *, /, %, parentheses."
+          }
+        },
+        {
+          "name": "22 — Unit Converter",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 202,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"unit_converter\",\n    \"arguments\": {\n      \"value\": 100,\n      \"from_unit\": \"km\",\n      \"to_unit\": \"mile\",\n      \"category\": \"length\"\n    }\n  }\n}" },
+            "description": "Convert units. Categories: length, weight, temperature, area, volume, speed"
+          }
+        },
+        {
+          "name": "23 — Percentage Calculator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 203,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"percentage_calculator\",\n    \"arguments\": {\n      \"operation\": \"percent_change\",\n      \"value1\": 5000,\n      \"value2\": 7500\n    }\n  }\n}" },
+            "description": "Operations: percent_of, what_percent, percent_change, add_percent, subtract_percent"
+          }
+        },
+        {
+          "name": "24 — Statistics Calculator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 204,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"statistics_calculator\",\n    \"arguments\": {\n      \"numbers\": [12, 45, 67, 23, 89, 34, 56, 78, 90, 11, 43, 65]\n    }\n  }\n}" },
+            "description": "Get mean, median, mode, std deviation, variance, min, max, quartiles."
+          }
+        },
+        {
+          "name": "25 — Prime Checker",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 205,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"prime_checker\",\n    \"arguments\": {\n      \"number\": 97\n    }\n  }\n}" },
+            "description": "Check if a number is prime and get all its factors."
+          }
+        },
+        {
+          "name": "26 — Fibonacci Sequence",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 206,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"fibonacci\",\n    \"arguments\": {\n      \"terms\": 15\n    }\n  }\n}" },
+            "description": "Generate Fibonacci sequence up to 50 terms."
+          }
+        },
+        {
+          "name": "27 — BMI Calculator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 207,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"bmi_calculator\",\n    \"arguments\": {\n      \"weight_kg\": 75,\n      \"height_cm\": 178\n    }\n  }\n}" },
+            "description": "Calculate BMI, category, and ideal weight range."
+          }
+        },
+        {
+          "name": "28 — Compound Interest",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 208,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"compound_interest\",\n    \"arguments\": {\n      \"principal\": 10000,\n      \"rate_percent\": 7,\n      \"years\": 20,\n      \"compounds_per_year\": 12\n    }\n  }\n}" },
+            "description": "Calculate compound interest with yearly breakdown."
+          }
+        },
+        {
+          "name": "29 — Loan Calculator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 209,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"loan_calculator\",\n    \"arguments\": {\n      \"principal\": 300000,\n      \"annual_rate_percent\": 6.5,\n      \"years\": 30\n    }\n  }\n}" },
+            "description": "Calculate monthly loan payment and total interest."
+          }
+        },
+        {
+          "name": "30 — Currency Converter",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 210,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"currency_converter\",\n    \"arguments\": {\n      \"amount\": 1000,\n      \"from\": \"USD\",\n      \"to\": \"INR\"\n    }\n  }\n}" },
+            "description": "Convert between 30 major currencies. Codes: USD, EUR, GBP, INR, JPY, AED, etc."
+          }
+        },
+        {
+          "name": "31 — Roman Numeral Converter",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 211,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"roman_numeral_converter\",\n    \"arguments\": {\n      \"value\": \"2025\",\n      \"to\": \"roman\"\n    }\n  }\n}" },
+            "description": "Convert integers to Roman numerals or vice versa. Set to: roman or integer"
+          }
+        },
+        {
+          "name": "32 — Number Formatter",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 212,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"number_formatter\",\n    \"arguments\": {\n      \"number\": 1234567,\n      \"format\": \"words\"\n    }\n  }\n}" },
+            "description": "Format numbers. Options: commas, scientific, binary, hex, octal, words"
+          }
+        },
+        {
+          "name": "33 — Tip Calculator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 213,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"tip_calculator\",\n    \"arguments\": {\n      \"bill_amount\": 120.50,\n      \"tip_percent\": 18,\n      \"people\": 4\n    }\n  }\n}" },
+            "description": "Calculate tip and split the bill among any number of people."
+          }
+        },
+        {
+          "name": "34 — Tax Calculator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 214,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"tax_calculator\",\n    \"arguments\": {\n      \"amount\": 500,\n      \"tax_rate_percent\": 18,\n      \"tax_type\": \"add_tax\"\n    }\n  }\n}" },
+            "description": "Add or remove tax from an amount. tax_type: add_tax or remove_tax"
+          }
+        },
+        {
+          "name": "35 — Age Calculator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 215,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"age_calculator\",\n    \"arguments\": {\n      \"birth_date\": \"1995-06-15\"\n    }\n  }\n}" },
+            "description": "Calculate exact age and days until next birthday."
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🌐 Web & Research",
+      "item": [
+        {
+          "name": "36 — Generate SEO Meta Tags",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 301,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"generate_seo_meta\",\n    \"arguments\": {\n      \"title\": \"Best Project Management Tool for Teams\",\n      \"description\": \"Manage your team projects with ease using our all-in-one platform. Track tasks, deadlines, and collaborate in real time.\",\n      \"keywords\": [\"project management\", \"team collaboration\", \"productivity\", \"task tracker\"],\n      \"url\": \"https://myapp.com/features\",\n      \"image_url\": \"https://myapp.com/og-image.png\"\n    }\n  }\n}" },
+            "description": "Generate complete SEO meta tags including Open Graph and Twitter Cards."
+          }
+        },
+        {
+          "name": "37 — Generate Robots.txt",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 302,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"generate_robots_txt\",\n    \"arguments\": {\n      \"sitemap_url\": \"https://mysite.com/sitemap.xml\",\n      \"disallowed_paths\": [\"/admin\", \"/private\", \"/api\"],\n      \"crawl_delay\": 10,\n      \"allow_all\": true\n    }\n  }\n}" },
+            "description": "Generate robots.txt with custom rules, sitemap and crawl delay."
+          }
+        },
+        {
+          "name": "38 — HTTP Status Lookup",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 303,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"http_status_lookup\",\n    \"arguments\": {\n      \"code\": 429\n    }\n  }\n}" },
+            "description": "Look up the meaning of any HTTP status code."
+          }
+        },
+        {
+          "name": "39 — Color Converter",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 304,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"color_converter\",\n    \"arguments\": {\n      \"color\": \"#3B82F6\",\n      \"from\": \"hex\"\n    }\n  }\n}" },
+            "description": "Convert colors between HEX, RGB, and HSL formats."
+          }
+        },
+        {
+          "name": "40 — Generate QR Code",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 305,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"generate_qr_data\",\n    \"arguments\": {\n      \"data\": \"https://mywebsite.com\",\n      \"size\": 300,\n      \"error_correction\": \"M\"\n    }\n  }\n}" },
+            "description": "Generate a QR code image URL for any text or URL."
+          }
+        },
+        {
+          "name": "41 — Parse JSON",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 306,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"parse_json\",\n    \"arguments\": {\n      \"json_string\": \"{\\\"user\\\":{\\\"name\\\":\\\"John Doe\\\",\\\"age\\\":30,\\\"address\\\":{\\\"city\\\":\\\"New York\\\",\\\"zip\\\":\\\"10001\\\"}}}\",\n      \"path\": \"user.address.city\"\n    }\n  }\n}" },
+            "description": "Validate, parse, and extract values from JSON using dot notation path."
+          }
+        },
+        {
+          "name": "42 — JSON to CSV",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 307,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"json_to_csv\",\n    \"arguments\": {\n      \"json_array\": \"[{\\\"name\\\":\\\"Alice\\\",\\\"age\\\":30,\\\"city\\\":\\\"New York\\\",\\\"role\\\":\\\"Engineer\\\"},{\\\"name\\\":\\\"Bob\\\",\\\"age\\\":25,\\\"city\\\":\\\"Los Angeles\\\",\\\"role\\\":\\\"Designer\\\"},{\\\"name\\\":\\\"Carol\\\",\\\"age\\\":35,\\\"city\\\":\\\"Chicago\\\",\\\"role\\\":\\\"Manager\\\"}]\"\n    }\n  }\n}" },
+            "description": "Convert a JSON array to CSV format for Excel/Sheets."
+          }
+        },
+        {
+          "name": "43 — CSV to JSON",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 308,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"csv_to_json\",\n    \"arguments\": {\n      \"csv\": \"name,age,city,role\\nAlice,30,New York,Engineer\\nBob,25,Los Angeles,Designer\\nCarol,35,Chicago,Manager\",\n      \"delimiter\": \",\"\n    }\n  }\n}" },
+            "description": "Convert CSV data to a JSON array."
+          }
+        },
+        {
+          "name": "44 — Markdown to HTML",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 309,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"markdown_to_html\",\n    \"arguments\": {\n      \"markdown\": \"# Hello World\\n\\nThis is **bold** and *italic* text.\\n\\n## Features\\n\\n- Fast performance\\n- Easy to use\\n- [Click here](https://example.com)\"\n    }\n  }\n}" },
+            "description": "Convert Markdown to HTML including headings, bold, italic, links, lists."
+          }
+        },
+        {
+          "name": "45 — HTML to Text",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 310,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"html_to_text\",\n    \"arguments\": {\n      \"html\": \"<h1>Hello World</h1><p>This is a <strong>paragraph</strong> with some <em>formatting</em>.</p><ul><li>Item 1</li><li>Item 2</li></ul>\"\n    }\n  }\n}" },
+            "description": "Strip all HTML tags and return clean plain text."
+          }
+        },
+        {
+          "name": "46 — Generate Sitemap",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 311,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"generate_sitemap\",\n    \"arguments\": {\n      \"base_url\": \"https://mysite.com\",\n      \"pages\": [\"/\", \"/about\", \"/pricing\", \"/contact\", \"/blog\", \"/features\"],\n      \"change_freq\": \"weekly\",\n      \"priority\": 0.8\n    }\n  }\n}" },
+            "description": "Generate an XML sitemap for a website."
+          }
+        },
+        {
+          "name": "47 — Parse User Agent",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 312,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"parse_user_agent\",\n    \"arguments\": {\n      \"user_agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\"\n    }\n  }\n}" },
+            "description": "Detect browser, OS, device type and bot status from User-Agent string."
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "📅 Date & Time",
+      "item": [
+        {
+          "name": "48 — Date Formatter",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 401,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"date_formatter\",\n    \"arguments\": {\n      \"date\": \"now\",\n      \"format\": \"long\"\n    }\n  }\n}" },
+            "description": "Format dates. Options: iso, us, eu, long, short, unix, relative, custom"
+          }
+        },
+        {
+          "name": "49 — Date Difference",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 402,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"date_difference\",\n    \"arguments\": {\n      \"date1\": \"2025-01-01\",\n      \"date2\": \"2025-12-31\"\n    }\n  }\n}" },
+            "description": "Calculate exact difference between two dates in days, weeks, months, years."
+          }
+        },
+        {
+          "name": "50 — Add Time to Date",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 403,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"add_time\",\n    \"arguments\": {\n      \"date\": \"2025-03-01\",\n      \"amount\": 90,\n      \"unit\": \"days\",\n      \"operation\": \"add\"\n    }\n  }\n}" },
+            "description": "Add or subtract time. Units: seconds, minutes, hours, days, weeks, months, years"
+          }
+        },
+        {
+          "name": "51 — Working Days Calculator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 404,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"working_days_calculator\",\n    \"arguments\": {\n      \"start_date\": \"2025-03-01\",\n      \"end_date\": \"2025-03-31\"\n    }\n  }\n}" },
+            "description": "Count Mon-Fri business days between two dates."
+          }
+        },
+        {
+          "name": "52 — Timezone Converter",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 405,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"timezone_converter\",\n    \"arguments\": {\n      \"datetime\": \"now\",\n      \"from_timezone\": \"America/New_York\",\n      \"to_timezone\": \"Asia/Kolkata\"\n    }\n  }\n}" },
+            "description": "Convert time between any IANA timezones. Use 'now' for current time."
+          }
+        },
+        {
+          "name": "53 — Countdown To Event",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 406,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"countdown_to\",\n    \"arguments\": {\n      \"target_date\": \"2025-12-31\",\n      \"event_name\": \"New Year 2026\"\n    }\n  }\n}" },
+            "description": "Get days, hours, minutes, seconds until any future date."
+          }
+        },
+        {
+          "name": "54 — Calendar Generator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 407,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"calendar_generator\",\n    \"arguments\": {\n      \"year\": 2025,\n      \"month\": 6\n    }\n  }\n}" },
+            "description": "Generate a text calendar for any month and year."
+          }
+        },
+        {
+          "name": "55 — Unix Timestamp",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 408,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"unix_timestamp\",\n    \"arguments\": {\n      \"value\": \"now\",\n      \"to\": \"timestamp\"\n    }\n  }\n}" },
+            "description": "Convert between Unix timestamps and human dates. Set to: timestamp or date"
+          }
+        },
+        {
+          "name": "56 — Week Number",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 409,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"week_number\",\n    \"arguments\": {\n      \"date\": \"now\"\n    }\n  }\n}" },
+            "description": "Get the week number and day of year for any date."
+          }
+        },
+        {
+          "name": "57 — Holiday Checker",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 410,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"is_holiday\",\n    \"arguments\": {\n      \"date\": \"2025-07-04\"\n    }\n  }\n}" },
+            "description": "Check if a date is a US Federal holiday."
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "💼 Business & Finance",
+      "item": [
+        {
+          "name": "58 — Invoice Generator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 501,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"invoice_generator\",\n    \"arguments\": {\n      \"company_name\": \"Tech Studio\",\n      \"client_name\": \"Acme Corp\",\n      \"items\": [\n        {\"name\": \"Web Design\", \"quantity\": 1, \"price\": 2500},\n        {\"name\": \"SEO Setup\", \"quantity\": 1, \"price\": 800},\n        {\"name\": \"Monthly Hosting\", \"quantity\": 12, \"price\": 50}\n      ],\n      \"tax_rate\": 8.5,\n      \"currency\": \"USD\",\n      \"due_days\": 30\n    }\n  }\n}" },
+            "description": "Generate structured invoice data with line items, tax, and totals."
+          }
+        },
+        {
+          "name": "59 — Profit Margin Calculator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 502,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"profit_margin_calculator\",\n    \"arguments\": {\n      \"cost\": 95000,\n      \"revenue\": 150000,\n      \"fixed_costs\": 20000\n    }\n  }\n}" },
+            "description": "Calculate gross margin, net margin, markup, and ROI."
+          }
+        },
+        {
+          "name": "60 — Cash Flow Analyzer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 503,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"cash_flow_analyzer\",\n    \"arguments\": {\n      \"income\": [\n        {\"name\": \"Product Sales\", \"amount\": 45000},\n        {\"name\": \"Consulting\", \"amount\": 12000},\n        {\"name\": \"Subscriptions\", \"amount\": 8000}\n      ],\n      \"expenses\": [\n        {\"name\": \"Salaries\", \"amount\": 25000},\n        {\"name\": \"Marketing\", \"amount\": 8000},\n        {\"name\": \"Infrastructure\", \"amount\": 3000},\n        {\"name\": \"Office\", \"amount\": 2000}\n      ]\n    }\n  }\n}" },
+            "description": "Analyze income vs expenses with breakdown and savings rate."
+          }
+        },
+        {
+          "name": "61 — NPV Calculator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 504,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"npv_calculator\",\n    \"arguments\": {\n      \"initial_investment\": 100000,\n      \"cash_flows\": [25000, 30000, 35000, 40000, 45000],\n      \"discount_rate_percent\": 10\n    }\n  }\n}" },
+            "description": "Calculate Net Present Value of an investment with cash flows."
+          }
+        },
+        {
+          "name": "62 — Break Even Analysis",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 505,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"break_even_analysis\",\n    \"arguments\": {\n      \"fixed_costs\": 50000,\n      \"price_per_unit\": 200,\n      \"variable_cost_per_unit\": 80\n    }\n  }\n}" },
+            "description": "Find units needed to break even and contribution margin."
+          }
+        },
+        {
+          "name": "63 — Salary to Hourly",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 506,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"salary_to_hourly\",\n    \"arguments\": {\n      \"amount\": 85000,\n      \"from\": \"annually\",\n      \"hours_per_week\": 40\n    }\n  }\n}" },
+            "description": "Convert any salary frequency. From: hourly, daily, weekly, biweekly, monthly, annually"
+          }
+        },
+        {
+          "name": "64 — Stock Return Calculator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 507,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"stock_return_calculator\",\n    \"arguments\": {\n      \"buy_price\": 150,\n      \"sell_price\": 210,\n      \"shares\": 100,\n      \"dividends_received\": 250,\n      \"buy_commission\": 9.99,\n      \"sell_commission\": 9.99\n    }\n  }\n}" },
+            "description": "Calculate stock trade ROI including commissions and dividends."
+          }
+        },
+        {
+          "name": "65 — Budget Planner",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 508,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"budget_planner\",\n    \"arguments\": {\n      \"monthly_income\": 7500,\n      \"rule\": \"50-30-20\"\n    }\n  }\n}" },
+            "description": "Create budget using 50-30-20, 70-20-10, or custom split rules."
+          }
+        },
+        {
+          "name": "66 — KPI Tracker",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 509,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"kpi_tracker\",\n    \"arguments\": {\n      \"revenue\": 500000,\n      \"customers\": 2500,\n      \"new_customers\": 200,\n      \"lost_customers\": 75,\n      \"marketing_spend\": 30000,\n      \"support_tickets\": 450,\n      \"resolved_tickets\": 420\n    }\n  }\n}" },
+            "description": "Calculate ARPU, churn rate, CAC, LTV, LTV:CAC ratio, resolution rate."
+          }
+        },
+        {
+          "name": "67 — Business Plan Outline",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 510,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"generate_business_plan_outline\",\n    \"arguments\": {\n      \"business_name\": \"TechFlow\",\n      \"industry\": \"SaaS / Project Management\",\n      \"business_type\": \"startup\"\n    }\n  }\n}" },
+            "description": "Generate an 8-section business plan outline for any industry."
+          }
+        },
+        {
+          "name": "68 — SWOT Analysis Template",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 511,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"swot_template\",\n    \"arguments\": {\n      \"business_name\": \"My E-commerce Store\",\n      \"industry\": \"Retail / E-commerce\"\n    }\n  }\n}" },
+            "description": "Generate a SWOT analysis template with guided prompts for each quadrant."
+          }
+        },
+        {
+          "name": "69 — ROI Calculator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 512,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"roi_calculator\",\n    \"arguments\": {\n      \"investment\": 50000,\n      \"returns\": 180000,\n      \"time_period_months\": 12\n    }\n  }\n}" },
+            "description": "Calculate ROI, annualized return, profit and payback period."
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "💻 Developer Tools",
+      "item": [
+        {
+          "name": "70 — Generate UUID",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 601,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"generate_uuid\",\n    \"arguments\": {\n      \"count\": 10\n    }\n  }\n}" },
+            "description": "Generate 1-50 UUID v4 values in a single call."
+          }
+        },
+        {
+          "name": "71 — Hash Generator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 602,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"hash_generator\",\n    \"arguments\": {\n      \"text\": \"Hello World!\",\n      \"algorithm\": \"djb2\"\n    }\n  }\n}" },
+            "description": "Generate hash checksums. Algorithms: simple32, djb2, sdbm, adler32"
+          }
+        },
+        {
+          "name": "72 — Generate Regex Pattern",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 603,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"generate_regex\",\n    \"arguments\": {\n      \"pattern_type\": \"strong_password\"\n    }\n  }\n}" },
+            "description": "Get regex for: email, phone_us, url, ip_address, credit_card, zip_code, date_us, date_iso, hex_color, username, strong_password, ssn, mac_address"
+          }
+        },
+        {
+          "name": "73 — Code Complexity",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 604,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"code_complexity\",\n    \"arguments\": {\n      \"code\": \"function processUser(user) {\\n  if (!user) return null;\\n  if (user.age < 18) {\\n    return 'minor';\\n  } else if (user.age > 65) {\\n    return 'senior';\\n  }\\n  for (let i = 0; i < user.roles.length; i++) {\\n    if (user.roles[i] === 'admin') {\\n      return 'admin';\\n    }\\n  }\\n  return 'regular';\\n}\",\n      \"language\": \"javascript\"\n    }\n  }\n}" },
+            "description": "Analyze cyclomatic complexity, line counts, and function count."
+          }
+        },
+        {
+          "name": "74 — API Endpoint Generator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 605,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"api_endpoint_generator\",\n    \"arguments\": {\n      \"resource\": \"products\",\n      \"base_url\": \"https://api.myapp.com/v1\",\n      \"include_auth\": true\n    }\n  }\n}" },
+            "description": "Scaffold all 6 REST endpoints (GET list, POST, GET one, PUT, PATCH, DELETE)."
+          }
+        },
+        {
+          "name": "75 — SQL Query Builder",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 606,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"sql_query_builder\",\n    \"arguments\": {\n      \"query_type\": \"select\",\n      \"table\": \"users\",\n      \"columns\": [\"id\", \"name\", \"email\", \"created_at\"],\n      \"conditions\": \"active = 1 AND age > 18\"\n    }\n  }\n}" },
+            "description": "Build SQL queries. Types: select, insert, update, delete, create_table"
+          }
+        },
+        {
+          "name": "76 — Generate Mock Data (Users)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 607,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"generate_mock_data\",\n    \"arguments\": {\n      \"type\": \"users\",\n      \"count\": 10\n    }\n  }\n}" },
+            "description": "Generate realistic mock data. Types: users, products, orders, companies, addresses"
+          }
+        },
+        {
+          "name": "77 — Color Palette Generator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 608,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"color_palette_generator\",\n    \"arguments\": {\n      \"base_hex\": \"#3B82F6\",\n      \"palette_type\": \"monochromatic\"\n    }\n  }\n}" },
+            "description": "Generate palettes. Types: monochromatic, complementary, triadic, analogous"
+          }
+        },
+        {
+          "name": "78 — Cron Expression Parser",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 609,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"cron_expression_parser\",\n    \"arguments\": {\n      \"expression\": \"0 9 * * 1-5\"\n    }\n  }\n}" },
+            "description": "Parse any cron expression into human-readable format."
+          }
+        },
+        {
+          "name": "79 — Git Commit Message",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 610,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"git_commit_message\",\n    \"arguments\": {\n      \"type\": \"feat\",\n      \"scope\": \"auth\",\n      \"description\": \"add Google OAuth login support\",\n      \"breaking_change\": false,\n      \"body\": \"Implements Google OAuth 2.0 flow with refresh tokens. Users can now sign in with their Google account.\"\n    }\n  }\n}" },
+            "description": "Generate conventional commit messages. Types: feat, fix, docs, style, refactor, test, chore, perf, ci, build"
+          }
+        },
+        {
+          "name": "80 — Env Variable Generator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 611,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"environment_variable_generator\",\n    \"arguments\": {\n      \"app_name\": \"MyApp API\",\n      \"variables\": [\n        {\"name\": \"DATABASE_URL\", \"description\": \"PostgreSQL connection string\", \"required\": true},\n        {\"name\": \"JWT_SECRET\", \"description\": \"Secret key for JWT tokens\", \"required\": true},\n        {\"name\": \"REDIS_URL\", \"description\": \"Redis connection URL\", \"required\": false},\n        {\"name\": \"PORT\", \"description\": \"Server port\", \"default_value\": \"3000\", \"required\": false},\n        {\"name\": \"NODE_ENV\", \"description\": \"Environment name\", \"default_value\": \"development\", \"required\": false}\n      ]\n    }\n  }\n}" },
+            "description": "Generate a .env file template with comments and required flags."
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "🤖 AI Prompts & Templates",
+      "item": [
+        {
+          "name": "81 — Generate System Prompt",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 701,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"generate_system_prompt\",\n    \"arguments\": {\n      \"role\": \"customer support agent\",\n      \"company\": \"TechCorp\",\n      \"tone\": \"friendly\",\n      \"capabilities\": [\"Answer product questions\", \"Process refunds\", \"Track orders\", \"Escalate billing issues\"],\n      \"restrictions\": [\"Never discuss competitor pricing\", \"Escalate legal questions to the legal team\"]\n    }\n  }\n}" },
+            "description": "Generate a complete system prompt for any AI assistant role."
+          }
+        },
+        {
+          "name": "82 — Chain of Thought Prompt",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 702,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"chain_of_thought_prompt\",\n    \"arguments\": {\n      \"problem\": \"Should we expand to the European market given our current $2M ARR and 15% MoM growth?\",\n      \"domain\": \"business\"\n    }\n  }\n}" },
+            "description": "Wrap any problem in a step-by-step reasoning prompt template."
+          }
+        },
+        {
+          "name": "83 — Few Shot Template",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 703,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"few_shot_template\",\n    \"arguments\": {\n      \"task\": \"Classify customer feedback as Positive, Neutral, or Negative\",\n      \"examples\": [\n        {\"input\": \"The product is amazing and works perfectly!\", \"output\": \"Positive\"},\n        {\"input\": \"It arrived on time, nothing special.\", \"output\": \"Neutral\"},\n        {\"input\": \"Terrible experience. Completely broken.\", \"output\": \"Negative\"}\n      ],\n      \"new_input\": \"I expected more features for the price\"\n    }\n  }\n}" },
+            "description": "Build a few-shot prompt with examples for consistent AI outputs."
+          }
+        },
+        {
+          "name": "84 — Email Template (Cold Outreach)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 704,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"email_template_generator\",\n    \"arguments\": {\n      \"type\": \"cold_outreach\",\n      \"recipient_name\": \"John\",\n      \"sender_name\": \"Sarah\",\n      \"company\": \"GrowthLab\",\n      \"key_details\": \"We help SaaS companies reduce churn by 40% in 90 days using behavioral analytics.\"\n    }\n  }\n}" },
+            "description": "Types: welcome, follow_up, cold_outreach, apology, rejection, proposal, invoice_reminder, thank_you, announcement"
+          }
+        },
+        {
+          "name": "85 — Job Description Generator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 705,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"job_description_generator\",\n    \"arguments\": {\n      \"title\": \"Senior Full Stack Engineer\",\n      \"company\": \"StartupXYZ\",\n      \"department\": \"Engineering\",\n      \"employment_type\": \"full-time\",\n      \"experience_years\": 5,\n      \"location\": \"Remote\",\n      \"salary_range\": \"$120,000 - $160,000\"\n    }\n  }\n}" },
+            "description": "Generate a complete job description with requirements, responsibilities, and benefits."
+          }
+        },
+        {
+          "name": "86 — Meeting Agenda Generator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 706,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"meeting_agenda_generator\",\n    \"arguments\": {\n      \"meeting_title\": \"Q2 Product Planning Session\",\n      \"duration_minutes\": 90,\n      \"attendees\": [\"CEO\", \"CTO\", \"Product Manager\", \"Lead Designer\", \"Marketing Lead\"],\n      \"meeting_type\": \"planning\"\n    }\n  }\n}" },
+            "description": "Types: team_standup, project_kickoff, retrospective, planning, all_hands, one_on_one, custom"
+          }
+        },
+        {
+          "name": "87 — User Story Generator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 707,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"user_story_generator\",\n    \"arguments\": {\n      \"feature\": \"two-factor authentication\",\n      \"user_type\": \"registered user\",\n      \"goal\": \"enable 2FA on my account\",\n      \"reason\": \"protect my account from unauthorized access\"\n    }\n  }\n}" },
+            "description": "Generate Agile user stories with acceptance criteria and definition of done."
+          }
+        },
+        {
+          "name": "88 — OKR Generator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 708,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"okr_generator\",\n    \"arguments\": {\n      \"objective\": \"Become the market leader in SMB project management software\",\n      \"team\": \"Product Team\",\n      \"timeframe\": \"Q2 2025\",\n      \"key_results_count\": 4\n    }\n  }\n}" },
+            "description": "Generate a full OKR framework with objective and measurable key results."
+          }
+        },
+        {
+          "name": "89 — Content Calendar Generator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 709,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"content_calendar_generator\",\n    \"arguments\": {\n      \"brand\": \"TechStartup\",\n      \"industry\": \"SaaS\",\n      \"platforms\": [\"LinkedIn\", \"Twitter\", \"Instagram\"],\n      \"posts_per_week\": 5,\n      \"content_pillars\": [\"Educational\", \"Behind the Scenes\", \"Customer Story\", \"Product Feature\", \"Industry News\"]\n    }\n  }\n}" },
+            "description": "Generate a weekly social media content calendar with post ideas and best times."
+          }
+        },
+        {
+          "name": "90 — Press Release Template",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{BASE_URL}}/mcp", "host": ["{{BASE_URL}}"], "path": ["mcp"] },
+            "body": { "mode": "raw", "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": 710,\n  \"method\": \"tools/call\",\n  \"params\": {\n    \"name\": \"press_release_template\",\n    \"arguments\": {\n      \"company\": \"TechFlow Inc\",\n      \"headline\": \"TechFlow Inc Raises $5M Seed Round to Revolutionize Project Management\",\n      \"subheadline\": \"Funding will accelerate product development and global expansion\",\n      \"city\": \"San Francisco\",\n      \"news_summary\": \"TechFlow Inc, a leading project management platform, today announced it has raised $5 million in seed funding led by Acme Ventures.\",\n      \"quote_person\": \"John Smith\",\n      \"quote_title\": \"Co-founder and CEO\"\n    }\n  }\n}" },
+            "description": "Generate a professional press release template ready to customize."
+          }
+        }
+      ]
+    }
+
+  ]
+}
