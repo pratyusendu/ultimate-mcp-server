@@ -21,6 +21,12 @@
 !**/*.sh
 !**/*.ps1
 
+# Always allow lib/ and tools/ contents
+!lib/
+!lib/**
+!tools/
+!tools/**
+
 # Keep sensitive/generated/unwanted files ignored
 node_modules/
 .vercel/
