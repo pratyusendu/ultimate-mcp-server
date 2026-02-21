@@ -2,7 +2,7 @@
 
 Production-ready MCP (Model Context Protocol) server deployed as Vercel serverless functions.
 
-Live link : https://ultimate-mcp-server.vercel.app/
+Live link : <a href="https://ultimate-mcp-server.vercel.app/" target="_blank">https://ultimate-mcp-server.vercel.app/</a>
 
 ## Organization Support
 - We can help your organization design and build a custom MCP server at low cost.
@@ -181,4 +181,5 @@ curl -X POST https://YOUR-DEPLOYMENT.vercel.app/mcp \
 - Project currently has no dedicated unit/integration test suite.
 
 ## License
-MIT
+
+Contact: pratdala@gmail.com
